@@ -1,7 +1,5 @@
 #!env python3
 
-from pprint import pprint
-
 my_list = """
 diglett
 snorlax
@@ -203,20 +201,20 @@ def test_dataset(eggs, tiers):
     all_in_eggs = [species for egg_list in eggs.values() for species in egg_list]
     all_in_tiers = [species for tier_list in tiers.values() for species in tier_list]
     
-    print(f"Found {len(all_in_eggs)} species by distance")
-    print(f"Found {len(all_in_tiers)} species by rarity")
+    print("Found {} species by distance".format(len(all_in_eggs)))
+    print("Found {} species by rarity".format(len(all_in_tiers)))
     
     print("Checking egg list against tier list:")
     for egg_class, egg_list in eggs.items():
         for species in egg_list:
-            print(f"    {species}:    ", end="")
+            print("    {}:    ".format(species), end="")
             assert species in all_in_tiers
             print("OK")
 
     print("\nChecking tier list against egg list:")
     for tier_class, tier_list in tiers.items():
         for species in tier_list:
-            print(f"    {species}:    ", end="")
+            print("    {}:    ".format(species), end="")
             assert species in all_in_eggs
             print("OK")
 
