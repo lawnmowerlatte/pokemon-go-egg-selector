@@ -1,185 +1,225 @@
 #!env python3
 
+from pprint import pprint
+
 my_list = """
-ABRA
-Machop
 diglett
-cHanSey
+snorlax
+dratini
+totodile
+pichu
+togepi
+mareep
+scyther
+larvitar
 """
 
-rarity_denominator = 257
+rarity_denominator = 508
 rarity_tiers = {
-    "common": 8,
-    "uncommon": 4,
-    "rare": 2,
-    "ultra-rare": 1
+    "common": 16,
+    "uncommon": 8,
+    "rare": 4,
+    "super-rare": 2,
+    "hyper-rare": 1
 }
 
 pokemon_tiers = {
     "common": [
-        "ekans",
+        "geodude",
+        "krabby",
         "nidoran-f",
         "nidoran-m",
+        "phanpy",
+        "pichu",
         "poliwag",
-        "geodude",
         "ponyta",
-        "krabby",
-        "goldeen",
-        "staryu",
-        "phanpy"
     ],
     "uncommon": [
-        "bulbasaur",
-        "charmander",
-        "squirtle",
-        "vulpix",
-        "oddish",
-        "diglett",
-        "growlithe",
         "abra",
-        "machop",
-        "slowpoke",
-        "magnemite",
-        "shellder",
-        "gastly",
-        "drowzee",
-        "voltorb",
-        "exeggcute",
-        "cubone",
-        "rhyhorn",
-        "eevee",
-        "dratini",
-        "pichu",
-        "cleffa",
-        "igglybuff",
-        "togepi",
         "aipom",
-        "pineco",
-        "gligar",
-        "slugma",
-        "mantine",
-        "stantler",
-        "tyrogue",
-        "smoochum",
+        "chinchou",
+        "cleffa",
+        "cubone",
+        "diglett",
+        "dratini",
+        "drowzee",
+        "eevee",
         "elekid",
+        "exeggcute",
+        "gastly",
+        "growlithe",
+        "hoppip",
+        "igglybuff",
+        "larvitar",
+        "machop",
         "magby",
-        "larvitar"
+        "mantine",
+        "mareep",
+        "marill",
+        "natu",
+        "oddish",
+        "porygon",
+        "rhyhorn",
+        "shellder",
+        "slowpoke",
+        "slugma",
+        "smoochum",
+        "spinarak",
+        "stantler",
+        "swinub",
+        "togepi",
+        "tyrogue",
+        "voltorb",
+        "wooper",
     ],
     "rare": [
-        "seel",
-        "onix",
         "chansey",
-        "tangela",
-        "scyther",
+        "chikorita",
+        "cyndaquil",
+        "houndour",
+        "onix",
         "pinsir",
-        "mareep",
+        "remoraid",
+        "scyther",
+        "seel",
+        "skarmory",
+        "snubbull",
         "sudowoodo",
-        "remoraid"
+        "tangela",
+        "teddiursa",
+        "totodile",
     ],
-    "ultra-rare": [
+    "super-rare": [
+        "aerodactyl",
+        "gligar",
         "grimer",
-        "lickitung",
+        "kabuto",
         "koffing",
         "lapras",
-        "porygon",
-        "omanyte",
-        "kabuto",
-        "aerodactyl",
-        "snorlax",
-        "yanma",
+        "lickitung",
+        "miltank",
         "misdreavus",
-        "wobbuffet",
-        "girafarig",
-        "dunsparce",
+        "omanyte",
+        "pineco",
         "qwilfish",
-        "shuckle",
         "sneasel",
-        "skarmory",
-        "miltank"
+        "snorlax",
+    ],
+    "hyper-rare": [
+        "dunsparce",
+        "girafarig",
+        "shuckle",
+        "wobbuffet",
     ]
 }
 
 pokemon_eggs = {
     2: [
-    	"bulbasaur",
-    	"charmander",
-    	"squirtle",
-    	"ekans",
-    	"nidoran-f",
-    	"nidoran-m",
-    	"oddish",
-    	"diglett",
-    	"abra",
-    	"machop",
-    	"geodude",
-    	"slowpoke",
-    	"gastly",
-    	"krabby",
-    	"exeggcute",
-    	"goldeen",
-    	"pichu",
-    	"cleffa",
-    	"igglybuff",
-    	"togepi",
-    	"aipom",
-    	"misdreavus",
-    	"slugma",
-    	"remoraid"
+        "abra",
+        "aipom",
+        "cleffa",
+        "diglett",
+        "exeggcute",
+        "gastly",
+        "geodude",
+        "igglybuff",
+        "krabby",
+        "machop",
+        "misdreavus",
+        "nidoran-f",
+        "nidoran-m",
+        "oddish",
+        "pichu",
+        "remoraid",
+        "slowpoke",
+        "slugma",
+        "spinarak",
+        "togepi",
     ],
     5: [
-    	"vulpix",
-    	"growlithe",
-    	"poliwag",
-    	"ponyta",
-    	"magnemite",
-    	"seel",
-    	"grimer",
-    	"shellder",
-    	"onix",
-    	"drowzee",
-    	"voltorb",
-    	"cubone",
-    	"lickitung",
-    	"koffing",
-    	"rhyhorn",
-    	"tangela",
-    	"staryu",
-    	"scyther",
-    	"pinsir",
-    	"eevee",
-    	"porygon",
-    	"omanyte",
-    	"kabuto",
-    	"yanma",
-    	"wobbuffet",
-    	"girafarig",
-    	"dunsparce",
-    	"qwilfish",
-    	"shuckle",
-    	"sneasel",
-    	"phanpy",
-    	"stantler",
-    	"tyrogue",
-    	"smoochum",
-    	"elekid",
-    	"magby"
+        "chikorita",
+        "chinchou",
+        "cubone",
+        "cyndaquil",
+        "drowzee",
+        "dunsparce",
+        "eevee",
+        "elekid",
+        "girafarig",
+        "gligar",
+        "grimer",
+        "growlithe",
+        "hoppip",
+        "houndour",
+        "kabuto",
+        "koffing",
+        "lickitung",
+        "magby",
+        "mantine",
+        "marill",
+        "natu",
+        "omanyte",
+        "onix",
+        "phanpy",
+        "pineco",
+        "pinsir",
+        "poliwag",
+        "ponyta",
+        "qwilfish",
+        "rhyhorn",
+        "scyther",
+        "seel",
+        "shellder",
+        "shuckle",
+        "smoochum",
+        "sneasel",
+        "snubbull",
+        "stantler",
+        "swinub",
+        "tangela",
+        "teddiursa",
+        "totodile",
+        "tyrogue",
+        "voltorb",
+        "wobbuffet",
+        "wooper",
     ],
     10: [
-    	"chansey",
-    	"lapras",
-    	"aerodactyl",
-    	"snorlax",
-    	"dratini",
-    	"mareep",
-    	"sudowoodo",
-    	"pineco",
-    	"gligar",
-    	"mantine",
-    	"skarmory",
-    	"miltank",
-    	"larvitar"
+        "aerodactyl",
+        "chansey",
+        "dratini",
+        "lapras",
+        "larvitar",
+        "mareep",
+        "miltank",
+        "porygon",
+        "skarmory",
+        "snorlax",
+        "sudowoodo",
     ]
 }
+
+def test_dataset(eggs, tiers):
+    all_in_eggs = [species for egg_list in eggs.values() for species in egg_list]
+    all_in_tiers = [species for tier_list in tiers.values() for species in tier_list]
+    
+    print(f"Found {len(all_in_eggs)} species by distance")
+    print(f"Found {len(all_in_tiers)} species by rarity")
+    
+    print("Checking egg list against tier list:")
+    for egg_class, egg_list in eggs.items():
+        for species in egg_list:
+            print(f"    {species}:    ", end="")
+            assert species in all_in_tiers
+            print("OK")
+
+    print("\nChecking tier list against egg list:")
+    for tier_class, tier_list in tiers.items():
+        for species in tier_list:
+            print(f"    {species}:    ", end="")
+            assert species in all_in_eggs
+            print("OK")
+
 
 def find_pokemon_rarity(pokemon):
     for rarity, pokemon_list in pokemon_tiers.items():
@@ -240,5 +280,8 @@ def desirable_per_km(desirable_pokemon, pokemon_eggs, rarity_tiers):
 def generate_desirable_list(desirable_text):
     desirable_list = [pokemon.lower().strip() for pokemon in desirable_text.splitlines() if pokemon != ""]
     return desirable_list
+
+
+# test_dataset(pokemon_eggs, pokemon_tiers)
 
 desirable_per_km(generate_desirable_list(my_list), pokemon_eggs, rarity_tiers)
